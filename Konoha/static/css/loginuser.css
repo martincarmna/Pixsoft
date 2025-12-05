@@ -69,13 +69,13 @@ body {
 
 /* INPUTS MISMOS TAMAÑOS */
 .login-left input {
-    width: 100%; /* corregido */
+    width: 100%;
     padding: 10px;
     border: 1px solid #d1d5db;
     border-radius: 5px;
     margin-bottom: 15px;
     background: #e5e7eb;
-    box-sizing: border-box; /* importante */
+    box-sizing: border-box;
 }
 
 /* ICON INPUT */
@@ -83,7 +83,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    width: 100%; /* corregido */
+    width: 100%;
 }
 
 .input-icon .icon {
@@ -93,20 +93,41 @@ body {
 
 .input-icon input {
     padding-left: 35px;
-    width: 100%; /* asegurar tamaño igual */
+    width: 100%;
     box-sizing: border-box;
 }
 
-/* BUTTON */
+/* BUTTON LINK (LOGIN) */
 .login-btn {
-    width: 100%; /* que empareje con los inputs */
+    width: 100%;
     padding: 12px;
     background: #4F46E5;
-    color: white;
-    border: none;
+    color: white !important;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 5px;
+
+    /* remove link style */
+    text-decoration: none !important;
+    display: inline-block;
+    text-align: center;
+
+    /* animation */
+    transition: background 0.25s ease, 
+                box-shadow 0.25s ease,
+                transform 0.15s ease;
+}
+
+/* HOVER EFECTO */
+.login-btn:hover {
+    background: #4338CA; /* tono más oscuro del morado */
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
+    transform: translateY(-2px);
+}
+
+/* CLICK EFECTO */
+.login-btn:active {
+    transform: scale(0.97);
 }
 
 /* TEXT LINKS */
