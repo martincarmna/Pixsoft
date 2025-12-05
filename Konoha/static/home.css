@@ -1,0 +1,71 @@
+*{
+    margin: 0%;
+    padding: 0%;
+  
+}
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+      background-image: url("/static/imagenes/konoha.jpg");
+      background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+}
+.konoha-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 289px;
+  height: 900px;
+  background: #f4fff4; /* verde claro suave tipo Konoha */
+  border-right: 2px solid #8abf74;
+  box-shadow: 0 0 4px #1f1f1f15;
+  border-radius: 0;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Encabezado */
+.konoha-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.konoha-header h2 {
+  font-size: 20px;
+  margin: 0;
+  color: #2f5d2f;
+  font-weight: 700;
+}
+
+/* Icono hoja */
+.konoha-icon {
+  font-size: 28px;
+  filter: drop-shadow(0px 0px 3px #8abf746f);
+}
+
+/* Menú */
+.konoha-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.konoha-menu li {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #2b4d2b;
+  transition: 0.2s;
+}
+
+/* Hover estilo chakra verde */
+.konoha-menu li:hover {
+  background: #c8f3cb;
+  box-shadow: 0 0 6px #8abf7490;
+}
