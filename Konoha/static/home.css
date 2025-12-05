@@ -69,3 +69,50 @@ body{
   background: #c8f3cb;
   box-shadow: 0 0 6px #8abf7490;
 }
+.banner-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 300px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.carousel-track img {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.6);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 10px;
+  border-radius: 50%;
+}
+
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
+
+.carousel-btn:hover {
+  background: rgba(255,255,255,0.9);
+}
+
+.carousel-track img {
+  width: 100%;          /* ocupa todo el ancho del carrusel */
+  height: 300px;        /* altura fija para todas */
+  object-fit: cover;    /* recorta y ajusta manteniendo proporción */
+  flex-shrink: 0;       /* evita que se reduzca en flexbox */
+}
