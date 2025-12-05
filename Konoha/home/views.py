@@ -7,7 +7,7 @@ def home(request):
     return render (request, 'index.html')
 def loginuser(request):
     return render (request, 'loginuser.html')
-def arriendos(request):
-    return render (request, 'arriendos.html')
 def pedidos(request):
     return render (request, 'pedidos.html')
+def arriendos(request):
+    return render (request, 'arriendos.html')
