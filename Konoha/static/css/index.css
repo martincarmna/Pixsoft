@@ -1,18 +1,39 @@
 body {
+    display: flex;             /* Habilita Flexbox */
+    flex-direction: column;    /* Apila header, main y footer */
+    min-height: 100%;          /* Asegura que el body use al menos 100% de la ventana */
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f2f4f7;
+    width: 100%;
+    
 }
 
-/* HEADER */
+* {
+    box-sizing: border-box; /* ¡Solución Mágica! */
+}
+
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 40px;
+    padding: 25px 30px;
     background: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
 }
+
+
+main {
+    
+    flex-grow: 1; /* ¡Crucial! Hace que el <main> ocupe todo el espacio extra
+                    y empuje al <footer> hacia el fondo */
+    padding: 20px 40px; /* Vuelve a añadir el padding lateral aquí */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
 
 .logo img {
     width: 120px;
@@ -114,19 +135,23 @@ body {
     color: white;
 }
 
-/* FOOTER */
-.footer {
-    background: #E5E7EB;
-    padding: 50px;
-    border-top: 8px solid #42C4D6;
-    margin-top: 40px;
-}
 
+.footer {
+    background: #ffffff;
+   
+    margin-top: 40px;
+    
+    
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+}
 .footer-top {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin-bottom: 40px;
+    width: 80%;
 }
 
 .footer-col h4,
@@ -163,6 +188,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 80%;
+    position: relative;
 }
 
 .socials span {

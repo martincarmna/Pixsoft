@@ -1,0 +1,59 @@
+
+/* categorias.css */
+/* static/css/categorias.css */
+
+.category-layout {
+    /* ESTAS REGLAS SON CRUCIALES PARA EL LAYOUT SIDE-BY-SIDE: */
+    display: flex;             
+    gap: 30px;                 /* Espacio entre el aside y la lista */
+    align-items: flex-start;   /* Alinea los elementos arriba */
+    
+    width: 100%;
+    min-height: 80vh;
+    margin-left: 0; 
+    margin-right: 0;
+
+    padding-left: 0;
+    padding-right: 40px; 
+}
+
+/* ... el resto de tu código CSS para .aside y .products-list ... */
+
+main{
+    padding-top: 20px; 
+    padding-bottom: 20px; 
+    padding-left: 0;       
+    padding-right: 0;
+}
+
+.aside {
+    width: 250px;
+    height: 80vh;              
+    flex-shrink: 0;            
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.products-list {
+    flex-grow: 1;          
+    background-color: rgb(148, 47, 47);    
+}
+
+.aside .cate {
+    
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    
+    background-color: transparent; 
+    color: rgb(43, 129, 118);
+    width: 100%; 
+}
+
+
+.cate:hover{
+    
+    font-weight: bold;
+}
