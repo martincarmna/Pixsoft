@@ -1,55 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos</title>
-    <link rel="stylesheet" href="/static/css/pedidos.css">
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Pedidos{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/pedidos.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+{% endblock extra_css %}
 
-<body>
+{% block content %}
+<div class="user-dashboard-layout">
+    
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">
-            <img src="/static/imagenes/logoEmpresa.png" alt="Logo">
-        </div>
-
-        <ul class="menu">
-            <li class="active"><i class="fa fa-box"></i> Pedidos</li>
-            <li><i class="fa fa-clipboard"></i> Arrendamientos</li>
-            <li><i class="fa fa-history"></i> Historial</li>
-        </ul>
-    </aside>
-
-    <!-- Main content -->
     <main class="content">
 
-        <!-- Navbar -->
-        <nav class="navbar">
-            <ul>
-                <li>Home</li>
-                <li>Categorías</li>
-                <li>Arrendamientos</li>
-                <li>Pedidos</li>
-                <li>Ayuda</li>
-            </ul>
-
-            <div class="nav-icons">
-                <i class="fa fa-bell"></i>
-                <i class="fa fa-cart-shopping"></i>
-                <img class="avatar" src="/static/imagenes/usericono.png" alt="User">
-            </div>
-        </nav>
+       
 
         <h2 class="title">Pedidos</h2>
 
-        <div class="search-bar">
-            <input type="text" placeholder="🔍  Search...">
-        </div>
+        
 
-        <!-- Orders Table -->
         <section class="orders">
             <table>
                 <thead>
@@ -65,7 +35,7 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td><img class="user-img" src="user1.jpg"> Username</td>
+                        <td><img class="user-img" src="{% static 'imagenes/user1.jpg' %}"> Username</td> 
                         <td>04/12/2025</td>
                         <td><span class="badge delivered">Entregado</span></td>
                         <td><i class="fa fa-eye"></i></td>
@@ -73,7 +43,7 @@
 
                     <tr>
                         <td>2</td>
-                        <td><img class="user-img" src="user2.jpg"> Username</td>
+                        <td><img class="user-img" src="{% static 'imagenes/user2.jpg' %}"> Username</td>
                         <td>04/10/2025</td>
                         <td><span class="badge process">En Proceso</span></td>
                         <td><i class="fa fa-eye"></i></td>
@@ -81,7 +51,7 @@
 
                     <tr>
                         <td>3</td>
-                        <td><img class="user-img" src="user3.jpg"> Username</td>
+                        <td><img class="user-img" src="{% static 'imagenes/user3.jpg' %}"> Username</td>
                         <td>04/09/2025</td>
                         <td><span class="badge delivered">Entregado</span></td>
                         <td><i class="fa fa-eye"></i></td>
@@ -89,7 +59,7 @@
 
                     <tr>
                         <td>4</td>
-                        <td><img class="user-img" src="user4.jpg"> Username</td>
+                        <td><img class="user-img" src="{% static 'imagenes/user4.jpg' %}"> Username</td>
                         <td>04/08/2025</td>
                         <td><span class="badge delivered">Entregado</span></td>
                         <td><i class="fa fa-eye"></i></td>
@@ -98,7 +68,6 @@
             </table>
         </section>
 
-        <!-- Pagination -->
         <div class="pagination">
             <span>&lt;</span>
             <span>1</span>
@@ -110,49 +79,10 @@
             <span>&gt;</span>
         </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-left">
-                <img src="logo.png" alt="Logo">
-            </div>
+        
 
-            <div class="footer-columns">
-                <div>
-                    <h4>Product</h4>
-                    <p>Features</p>
-                    <p>Pricing</p>
-                </div>
-
-                <div>
-                    <h4>Resources</h4>
-                    <p>Blog</p>
-                    <p>User guides</p>
-                    <p>Webinars</p>
-                </div>
-
-                <div>
-                    <h4>Company</h4>
-                    <p>About</p>
-                    <p>Join us</p>
-                </div>
-
-                <div class="newsletter">
-                    <h4>Subscribe to our newsletter</h4>
-                    <p>For product announcements and exclusive insights</p>
-                    <div class="newsletter-box">
-                        <input type="email" placeholder="✉  Input your email">
-                        <button>Subscribe</button>
-                    </div>
-                </div>
-            </div>
-
-        </footer>
-
-        <div class="sub-footer">
-            © 2022 Brand, Inc. • Privacy • Terms • Sitemap
-        </div>
+        
 
     </main>
-
-</body>
-</html>
+</div>
+{% endblock content %}

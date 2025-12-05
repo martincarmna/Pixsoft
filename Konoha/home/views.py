@@ -21,3 +21,8 @@ def pedidos(request):
 
 def arriendos(request):
     return render (request, 'arriendos.html')
+
+
+def ayuda(request):
+    return render (request, 'ayuda.html')
+

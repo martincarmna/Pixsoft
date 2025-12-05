@@ -4,8 +4,9 @@
 {% block title %}Tienda PxG - Home{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/carrusel.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/carrusel.css' %}">
+
 {% endblock extra_css %}
 
 {% block content %}
@@ -28,9 +29,6 @@
     </section>
 
     <section class="products-container">
-
-        
-
         <div class="product-card">
             <img src="{% static 'imagenes/impresoras.png' %}" alt="Producto">
             <h3>Product name</h3>
@@ -58,7 +56,35 @@
             <p class="price">$120</p>
             <button>+</button>
         </div>
-    </section>
+        
+        <div class="product-card">
+            <img src="https://via.placeholder.com/150" alt="Producto">
+            <h3>Product name</h3>
+            <p class="price">$120</p>
+            <button>+</button>
+        </div>
+        
+        <div class="product-card">
+            <img src="{% static 'imagenes/impresoras.png' %}" alt="Producto">
+            <h3>Product name</h3>
+            <p class="price">$330</p>
+            <button>+</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagenes/controles.png' %}" alt="Producto">
+            <h3>Product name</h3>
+            <p class="price">$160</p>
+            <button>+</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagenes/iPhone.jpg' %}" alt="Producto">
+            <h3>Product name</h3>
+            <p class="price">$190</p>
+            <button>+</button>
+        </div>
+    </section> 
 
     <div class="pagination">
         <button>«</button>
@@ -67,8 +93,7 @@
         <button>3</button>
         <button>»</button>
     </div>
-
-    </main>
+</main>
 {% endblock content %}
 
 {% block extra_js %}
@@ -83,7 +108,8 @@ let currentIndex = 0;
 
 function updateCarousel() {
   if (slides.length === 0) return;
-  const width = slides[0].getBoundingClientRect().width;
+  // Usar clientWidth o getBoundingClientRect().width es más confiable que clientWidth para elementos ocultos/flex
+  const width = slides[0].getBoundingClientRect().width; 
   track.style.transform = `translateX(-${currentIndex * width}px)`;
   indicators.forEach((dot, i) => {
     dot.classList.toggle('active', i === currentIndex);
@@ -91,26 +117,26 @@ function updateCarousel() {
 }
 
 nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateCarousel();
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
 });
 
 prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    updateCarousel();
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateCarousel();
 });
 
 indicators.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-    currentIndex = i;
-    updateCarousel();
-    });
+  dot.addEventListener('click', () => {
+    currentIndex = i;
+    updateCarousel();
+  });
 });
 
 // autoplay cada 4 segundos
 setInterval(() => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateCarousel();
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
 }, 4000);
 
 // Asegurar la inicialización correcta
