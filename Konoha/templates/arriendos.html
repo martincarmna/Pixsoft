@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Arriendos{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/arriendos.css' %}">
+
+    
+{% endblock %}
+
+{% block content %}
+    <div class="arriendos-page-wrapper">
+    
+          <header class="arriendos-header">
+              <h1>Arriendos</h1>
+              <p>Selecciona equipo, define periodo y confirma tu reserva.</p>
+          </header>
+
+          <div class="arriendos-grid">
+              
+              <section class="arriendos-catalogo-area">
+                  <div class="card catalogo-card"> 
+                      <h2>Catálogo</h2>
+                      <div id="catalog" class="catalogo-productos-grid">
+                          </div>
+                  </div>
+              </section>
+
+              <aside class="arriendos-resumen-area">
+                  <div class="card resumen-card sticky-top">
+                      <h2>Resumen de arriendo</h2>
+
+                      <div id="cart-empty" class="cart-empty-message">No hay productos en el carrito.</div>
+                      <ul id="cart-list" class="cart-list"></ul>
+
+                      <div id="summary" class="summary-details hidden-detail">
+                          <div class="summary-row"><span>Subtotal</span><span id="subtotal" class="currency"></span></div>
+                          <div class="summary-row"><span>Depósito</span><span id="deposit" class="currency"></span></div>
+                          <div class="summary-row total-row"><span>TOTAL</span><span id="total" class="currency"></span></div>
+
+                          <button id="checkout-btn" class="checkout-btn">
+                              Proceder al pago
+                          </button>
+
+                          <div class="summary-note">
+                              Nota: los depósitos se retienen y se reembolsan tras la devolución si no hay daños.
+                          </div>
+                      </div>
+                  </div>
+              </aside>
+          </div>
+      </div>
+    
+    <script>
+        // --------- Datos de ejemplo (sustituir por fetch a tu API) ----------
+        const PRODUCTS = [
+            { id: 1, title: "Cámara Mirrorless Sony A7", pricePerDay: 25.0, deposit: 150.0, available: true },
+            { id: 2, title: "Lente 24-70mm f/2.8", pricePerDay: 12.0, deposit: 80.0, available: true },
+            { id: 3, title: "Gimbal estabilizador", pricePerDay: 8.0, deposit: 60.0, available: false },
+            { id: 4, title: "Set Iluminación LED", pricePerDay: 10.0, deposit: 50.0, available: true }
+        ];
+        
+        // ... (El resto de tu código JavaScript puro va aquí, sin cambios) ...
+        
+        let cart = [];
+        const money = x => new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(x);
+        const catalogEl = document.getElementById('catalog');
+        const cartListEl = document.getElementById('cart-list');
+        const cartEmptyEl = document.getElementById('cart-empty');
+        const summaryEl = document.getElementById('summary');
+        const subtotalEl = document.getElementById('subtotal');
+        const depositEl = document.getElementById('deposit');
+        const totalEl = document.getElementById('total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        function renderCatalog() {
+            catalogEl.innerHTML = '';
+            for (const p of PRODUCTS) {
+                const card = document.createElement('article');
+                card.className = 'border rounded-lg p-4 bg-white shadow-sm flex gap-4 items-start';
+                card.innerHTML = `
+                    <div class="w-24 h-24 bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
+                        <span class="text-xs">Imagen</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-medium">${p.title}</h3>
+                        <div class="text-sm text-gray-600">${money(p.pricePerDay)} / día</div>
+                        <div class="text-sm text-gray-500">Depósito: ${money(p.deposit)}</div>
+                        <div class="mt-3 flex gap-2">
+                            <button class="add-btn px-3 py-1 rounded-md text-sm font-medium ${p.available ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}" data-id="${p.id}" ${p.available ? '' : 'disabled'}>
+                                Añadir
+                            </button>
+                            <button class="detail-btn px-3 py-1 rounded-md text-sm border" data-id="${p.id}">
+                                Detalles
+                            </button>
+                        </div>
+                    </div>
+                `;
+                catalogEl.appendChild(card);
+            }
+            document.querySelectorAll('.add-btn').forEach(b => {
+                b.addEventListener('click', e => {
+                    const id = Number(e.currentTarget.dataset.id);
+                    addToCart(id);
+                });
+            });
+            document.querySelectorAll('.detail-btn').forEach(b => {
+                b.addEventListener('click', e => {
+                    const id = Number(e.currentTarget.dataset.id);
+                    const p = PRODUCTS.find(x => x.id === id);
+                    alert(`${p.title}\nPrecio por día: ${money(p.pricePerDay)}\nDepósito: ${money(p.deposit)}\nDisponibilidad: ${p.available ? 'Disponible' : 'No disponible'}`);
+                });
+            });
+        }
+
+        function todayISO() {
+            return new Date().toISOString().slice(0, 10);
+        }
+        function addDaysISO(dateISO, days) {
+            const d = new Date(dateISO);
+            d.setDate(d.getDate() + days);
+            return d.toISOString().slice(0, 10);
+        }
+        function daysBetween(startIso, endIso) {
+            if (!startIso || !endIso) return 0;
+            const s = new Date(startIso);
+            const e = new Date(endIso);
+            const diffMs = e - s;
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+            return days > 0 ? days : 0;
+        }
+
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product || !product.available) {
+                alert('Producto no disponible.');
+                return;
+            }
+            const start = todayISO();
+            const defaultEnd = start;
+            const cartItem = {
+                cartId: Math.random().toString(36).slice(2, 9),
+                productId,
+                qty: 1,
+                startDate: start,
+                endDate: defaultEnd
+            };
+            cart.push(cartItem);
+            renderCart();
+        }
+
+        function renderCart() {
+            cartListEl.innerHTML = '';
+            if (cart.length === 0) {
+                cartEmptyEl.style.display = 'block';
+                summaryEl.classList.add('hidden');
+                return;
+            }
+            cartEmptyEl.style.display = 'none';
+            summaryEl.classList.remove('hidden');
+
+            for (const item of cart) {
+                const p = PRODUCTS.find(x => x.id === item.productId);
+                const days = daysBetween(item.startDate, item.endDate) || 1;
+                const subtotal = p.pricePerDay * item.qty * days;
+                const deposit = p.deposit * item.qty;
+                const total = subtotal + deposit;
+
+                const li = document.createElement('li');
+                li.className = 'border rounded p-3 bg-white';
+                li.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-medium text-sm">${p.title}</div>
+                            <div class="text-xs text-gray-500">${money(p.pricePerDay)} / día</div>
+                        </div>
+                        <div class="text-right text-sm">
+                            <div class="font-medium">${money(total)}</div>
+                            <button class="text-xs text-red-500 mt-2 remove-btn" data-cartid="${item.cartId}">Remover</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                            <label class="block">Desde</label>
+                            <input type="date" class="start-date mt-1 w-full text-sm border rounded px-2 py-1" value="${item.startDate}" min="${todayISO()}" data-cartid="${item.cartId}">
+                        </div>
+                        <div>
+                            <label class="block">Hasta</label>
+                            <input type="date" class="end-date mt-1 w-full text-sm border rounded px-2 py-1" value="${item.endDate}" min="${item.startDate}" data-cartid="${item.cartId}">
+                        </div>
+                    </div>
+
+                    <div class="mt-2 text-xs text-gray-600 flex items-center gap-2">
+                        <div>Días: <span class="font-medium days-count ml-1">${days}</span></div>
+                        <div class="ml-3">Cantidad:
+                            <input type="number" min="1" class="qty-input ml-2 w-16 p-1 border rounded text-sm" value="${item.qty}" data-cartid="${item.cartId}">
+                        </div>
+                    </div>
+
+                    <div class="mt-2 text-sm">
+                        <div>Subtotal: <span class="currency">${money(subtotal)}</span></div>
+                        <div>Depósito: <span class="currency">${money(deposit)}</span></div>
+                    </div>
+                `;
+                cartListEl.appendChild(li);
+            }
+
+            document.querySelectorAll('.remove-btn').forEach(b => {
+                b.addEventListener('click', e => {
+                    const cid = e.currentTarget.dataset.cartid;
+                    removeFromCart(cid);
+                });
+            });
+            document.querySelectorAll('.start-date').forEach(inp => {
+                inp.addEventListener('change', e => {
+                    const cid = e.currentTarget.dataset.cartid;
+                    const value = e.currentTarget.value;
+                    updateCartItem(cid, { startDate: value });
+                });
+            });
+            document.querySelectorAll('.end-date').forEach(inp => {
+                inp.addEventListener('change', e => {
+                    const cid = e.currentTarget.dataset.cartid;
+                    const value = e.currentTarget.value;
+                    updateCartItem(cid, { endDate: value });
+                });
+            });
+            document.querySelectorAll('.qty-input').forEach(inp => {
+                inp.addEventListener('change', e => {
+                    const cid = e.currentTarget.dataset.cartid;
+                    const value = Math.max(1, Number(e.currentTarget.value) || 1);
+                    updateCartItem(cid, { qty: value });
+                });
+            });
+
+            updateSummary();
+        }
+
+        function updateCartItem(cartId, patch) {
+            cart = cart.map(c => c.cartId === cartId ? { ...c, ...patch } : c);
+            cart = cart.map(c => {
+                if (new Date(c.endDate) < new Date(c.startDate)) {
+                    c.endDate = c.startDate;
+                }
+                return c;
+            });
+            renderCart();
+        }
+
+        function removeFromCart(cartId) {
+            cart = cart.filter(c => c.cartId !== cartId);
+            renderCart();
+        }
+
+        function updateSummary() {
+            let subtotal = 0;
+            let deposit = 0;
+            for (const item of cart) {
+                const p = PRODUCTS.find(x => x.id === item.productId);
+                const days = daysBetween(item.startDate, item.endDate) || 1;
+                subtotal += p.pricePerDay * item.qty * days;
+                deposit += p.deposit * item.qty;
+            }
+            const total = subtotal + deposit;
+            subtotalEl.textContent = money(subtotal);
+            depositEl.textContent = money(deposit);
+            totalEl.textContent = money(total);
+        }
+
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) { alert('El carrito está vacío.'); return; }
+            for (const item of cart) {
+                if (daysBetween(item.startDate, item.endDate) <= 0) {
+                    alert('Revisa las fechas: la fecha final debe ser igual o posterior a la inicial.');
+                    return;
+                }
+            }
+            let msg = 'Resumen de la orden:\n';
+            for (const item of cart) {
+                const p = PRODUCTS.find(x => x.id === item.productId);
+                const days = daysBetween(item.startDate, item.endDate) || 1;
+                msg += `- ${p.title} x${item.qty} · ${days} día(s) · ${money(p.pricePerDay * item.qty * days)}\n`;
+            }
+            let total = document.getElementById('total').textContent;
+            msg += `TOTAL: ${total}\n\n(En integración real, crearía la orden y redirigiría a la pasarela.)`;
+            alert(msg);
+
+            cart = [];
+            renderCart();
+        });
+
+        // Inicializar
+        renderCatalog();
+        renderCart();
+    </script>
+{% endblock content %}

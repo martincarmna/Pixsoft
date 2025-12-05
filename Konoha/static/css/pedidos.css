@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: #f2f3f7;
+    display: flex;
+}
+
+/* ----- SIDEBAR -----*/
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid #eee;
+    padding: 25px 20px;
+    position: fixed;
+}
+
+.sidebar .logo img {
+    width: 90px;
+    margin-bottom: 40px;
+}
+
+.sidebar .menu li {
+    list-style: none;
+    padding: 12px 10px;
+    margin: 8px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar .menu li.active,
+.sidebar .menu li:hover {
+    background: #eaf9f5;
+    color: #00a884;
+    font-weight: 600;
+}
+
+/* ----- MAIN CONTENT -----*/
+.content {
+    margin-left: 230px;
+    width: calc(100% - 230px);
+    padding: 20px 40px;
+}
+
+/* ----- NAVBAR -----*/
+.navbar {
+    background: #fff;
+    padding: 15px 25px;
+    border-radius: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 25px;
+}
+
+.navbar ul li {
+    list-style: none;
+    color: #555;
+    cursor: pointer;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-icons .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+/* ----- TITLE -----*/
+.title {
+    text-align: center;
+    margin: 25px 0;
+    font-size: 26px;
+}
+
+/* ----- SEARCH -----*/
+.search-bar {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.search-bar input {
+    width: 60%;
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: none;
+    background: #e5f8f3;
+    outline: none;
+}
+
+/* ----- TABLE -----*/
+.orders table {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.orders th {
+    padding: 15px 10px;
+    text-align: left;
+    color: #888;
+}
+
+.orders td {
+    padding: 18px 10px;
+    border-top: 1px solid #f1f1f1;
+    color: #444;
+}
+
+.user-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.delivered {
+    background: #e8f7ed;
+    color: #1ea463;
+}
+
+.process {
+    background: #eaf1ff;
+    color: #4678ec;
+}
+
+/* ----- PAGINATION -----*/
+.pagination {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.pagination span {
+    margin: 0 5px;
+    padding: 8px 13px;
+    background: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.pagination .active {
+    background: #00a884;
+    color: #fff;
+}
+
+/* ----- FOOTER -----*/
+footer{
+    background-color: #E5E7EB;
+}
+.footer {
+    margin-top: 40px;
+    display: flex;
+    padding: 30px 0;
+    border-top: 1px solid #ddd;
+    
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-columns div {
+    width: 22%;
+}
+
+.footer h4 {
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.newsletter-box {
+    display: flex;
+    margin-top: 10px;
+}
+
+.newsletter-box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px 0 0 6px;
+    width: 70%;
+}
+
+.newsletter-box button {
+    background: #6d77ff;
+    border: none;
+    padding: 10px 15px;
+    color: #fff;
+    border-radius: 0 6px 6px 0;
+}
+
+/* ----- SUB FOOTER -----*/
+.sub-footer {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}

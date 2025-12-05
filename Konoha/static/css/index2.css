@@ -1,0 +1,73 @@
+absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        .carousel-indicators span {
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .carousel-indicators .active {
+            background: rgba(255,255,255,0.9);
+        }
+
+        /* Productos */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+        .product-card {
+            background-color: white;
+            color: black;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            /* Importante para override de color de texto */
+            color: #000 !important; 
+        }
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0; /* Solo arriba */
+        }
+        .product-card h3 { margin: 10px 0; }
+        .price { font-weight: bold; }
+        .product-card button {
+            margin-top: 10px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #B0F5E9;
+            color: #000;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* Paginación */
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .pagination .active {
+            background: #B0F5E9;
+            color: #000;
+        }
+        
+        /* NOTA: El CSS de .header y .footer fue eliminado, 
+           ya que se asume que base.html los provee. */

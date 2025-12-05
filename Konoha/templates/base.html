@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tienda PxG{% endblock %}</title>
+    <title>{% block title %}PixSoft{% endblock %}</title>
     
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     
@@ -19,9 +19,9 @@
     </div>
 
     <nav class="menu">
-        <a href="">Home</a>
-        <a href="">Categorías</a>
-        <a href="">Arrendamientos</a>
+        <a href="{% url 'index.html' %}">Home</a>
+        <a href="{% url 'categorias.html' %}">Categorías</a>
+        <a href="{% url 'arriendos.html' %}">Arrendamientos</a>
         <a href="">Productos</a>
         <a href="">Ayuda</a>
     </nav>

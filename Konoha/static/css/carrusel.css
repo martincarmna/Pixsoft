@@ -1,0 +1,82 @@
+/* ======================================= */
+/* 1. Contenedor Principal (banner-carousel) */
+/* ======================================= */
+.banner-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    
+    /* ✅ ALTURA SINCRONIZADA con la imagen */
+    height: 500px; 
+    
+    margin: 20px auto; 
+    overflow: hidden; /* ¡CLAVE! Oculta el desborde */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* ======================================= */
+/* 2. Pista y Imágenes (carousel-track & img) */
+/* ======================================= */
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-track img {
+    /* ✅ CORRECCIÓN CLAVE: La imagen debe ser el 100% del ancho del carrusel */
+    width: 100% !important; 
+    
+    /* ✅ ALTURA SINCRONIZADA con el contenedor */
+    height: 500px !important; 
+    
+    object-fit: cover; /* Recorta la imagen para llenar el espacio sin distorsión */
+    flex-shrink: 0; 
+}
+
+/* ======================================= */
+/* 3. Botones de Navegación */
+/* ======================================= */
+.carousel-btn {
+    position: absolute;
+    top: 50%; /* Centrado vertical */
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.6); 
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 50%;
+    color: #000;
+}
+.carousel-btn.prev { 
+    left: 15px; 
+}
+.carousel-btn.next { 
+    right: 15px; 
+}
+.carousel-btn:hover { 
+    background: rgba(255, 255, 255, 0.9); 
+}
+
+/* ======================================= */
+/* 4. Indicadores (Puntos de Navegación) */
+/* ======================================= */
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%); /* Centrado horizontal */
+    display: flex;
+    gap: 8px;
+}
+.carousel-indicators span {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.carousel-indicators .active {
+    background: rgba(255, 255, 255, 0.9);
+}

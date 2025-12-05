@@ -1,0 +1,134 @@
+/* ==================================== */
+/* 1. Estilos de la PÁGINA y CUADRÍCULA */
+/* ==================================== */
+
+.arriendos-page-wrapper {
+    /* Centra el contenido y le da un ancho máximo similar a max-w-6xl */
+    max-width: 1280px; 
+    margin: 0 auto;
+    padding: 20px; /* Padding general de la página */
+}
+
+.arriendos-header h1 {
+    font-size: 2rem; /* text-2xl */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.arriendos-header p {
+    font-size: 0.875rem; /* text-sm */
+    color: #6B7280; /* text-gray-600 */
+    margin-bottom: 24px;
+}
+
+/* Contenedor principal de 2 columnas (Catálogo 2/3, Resumen 1/3) */
+.arriendos-grid {
+    display: grid;
+    /* Divide el espacio en 3 columnas iguales */
+    grid-template-columns: 2fr 1fr; /* 2 fracciones para Catálogo, 1 para Resumen (2/3 + 1/3) */
+    gap: 24px; /* Espacio entre las columnas (gap-6) */
+}
+
+/* Media Query para pantallas pequeñas (cambia a una sola columna) */
+@media (max-width: 1024px) {
+    .arriendos-grid {
+        grid-template-columns: 1fr; /* Una columna para todo */
+    }
+}
+
+
+/* =========================== */
+/* 2. Estilos de las TARJETAS (Boxes) */
+/* =========================== */
+
+/* Estilo base para todas las "cards" (cuadros) */
+.card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB; /* border */
+    border-radius: 8px; /* rounded-lg */
+    padding: 20px; /* p-5 (un poco más que p-4) */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+}
+
+/* Estilo para el Catálogo (dentro de la .arriendos-catalogo-area) */
+.catalogo-card h2 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    margin-bottom: 16px;
+}
+
+/* Estilo del Contenedor de Productos */
+.catalogo-productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsivo con min de 250px */
+    gap: 16px; /* gap-4 */
+}
+
+/* Estilo que tu JavaScript debe aplicar a cada producto */
+.producto-card {
+    /* Estilos internos de cada producto si no quieres usar Tailwind */
+    border: 1px solid #F3F4F6;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+
+/* =============================== */
+/* 3. Estilos del Resumen de Arriendo */
+/* =============================== */
+
+/* Para que la tarjeta de Resumen se quede fija al hacer scroll */
+.sticky-top {
+    position: sticky;
+    top: 24px; /* Mantiene la distancia de 24px (similar a top-6) del borde superior */
+}
+
+.resumen-card h2 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    margin-bottom: 16px;
+}
+
+.cart-empty-message {
+    margin-top: 12px; /* mt-3 */
+    font-size: 0.875rem; /* text-sm */
+    color: #6B7280; /* text-gray-500 */
+}
+
+/* Estilos de la sección de totales */
+.summary-details {
+    margin-top: 16px; /* mt-4 */
+    padding-top: 12px; /* pt-3 */
+    border-top: 1px solid #E5E7EB; /* border-t */
+    font-size: 0.875rem; /* text-sm */
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.total-row {
+    font-weight: 500; /* font-medium */
+    margin-top: 8px; /* mt-2 */
+}
+
+.checkout-btn {
+    margin-top: 16px; /* mt-4 */
+    width: 100%;
+    background-color: #10B981; /* bg-green-600 */
+    color: white;
+    padding: 8px 0; /* py-2 */
+    border-radius: 6px; /* rounded-md */
+    font-weight: 600; /* font-semibold */
+    border: none;
+    cursor: pointer;
+}
+
+.summary-note {
+    margin-top: 12px; /* mt-3 */
+    font-size: 0.75rem; /* text-xs */
+    color: #6B7280; /* text-gray-500 */
+    text-align: center;
+}

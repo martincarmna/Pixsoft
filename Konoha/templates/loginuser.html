@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión - PIXSOFT</title>
     <link rel="stylesheet" href="/static/css/loginuser.css">
+    
 </head>
+
 <body>
 
     <!-- HEADER -->
@@ -13,7 +16,7 @@
         <!-- <img src="/static/imagenes/logoutt.png" class="logo" alt="PIXSOFT"> -->
         <div class="header-right">
             <a href="#">Crear cuenta</a>
-            <img src="/static/imagenes/usericono.png" class="profile-img" >
+            <img src="/static/imagenes/usericono.png" class="profile-img">
         </div>
     </header>
 
@@ -36,7 +39,43 @@
                     <input type="password" placeholder="********">
                 </div>
 
-                <button class="login-btn">Sign In</button>
+                <!-- BOTÓN CON LINK A HOME -->
+                <!-- Opción 1: enlace (sin JS) -->
+<a href="/index.html" class="login-btn" role="button">Sign In</a>
+
+<!-- Opción 2: botón (con JS) por si el CSS u overlay impide clicks en el <a>) -->
+<button id="loginButton" class="login-btn" type="button" style="display:none;">Sign In</button>
+
+<script>
+  // Mostrar el <button> sólo si el <a> no funciona por alguna razón visual/overlay:
+  (function(){
+    // Comprueba si el link existe y tiene href válido
+    var link = document.querySelector('.login-btn[href]');
+    var href = link ? link.getAttribute('href') : null;
+
+    // Si el href está vacío o contiene el tag Django (no procesado), usa ruta absoluta
+    if (!href || href.includes('{%')) {
+      href = '/home/'; // fallback absoluto
+      if (link) link.setAttribute('href', href);
+    }
+
+    // Si hay un overlay CSS que impide clicks, forzamos el botón visible y lo usamos
+    var rect = link ? link.getBoundingClientRect() : null;
+    var clickable = true;
+    if (rect && (rect.width === 0 || rect.height === 0)) clickable = false;
+
+    if (!clickable) {
+      var btn = document.getElementById('loginButton');
+      btn.style.display = 'inline-block';
+      btn.addEventListener('click', function(){ window.location.href = href; });
+      // mejorar accesibilidad
+      btn.setAttribute('aria-label', 'Sign In, ir a Home');
+    }
+
+    // Protector: si hay errores JS en bton.js que rompen código, lo capturamos
+  })();
+</script>
+
 
                 <p class="or-text">OR CONTINUE WITH</p>
 
@@ -46,7 +85,7 @@
 
             <!-- RIGHT IMAGE -->
             <div class="login-right">
-                <img src="/static/imagenes/logoutt_sinfondo.png" class="product-img">
+                <img src="/static/imagenes/logoEmpresa.png" class="product-img">
             </div>
 
         </div>
@@ -106,4 +145,5 @@
     </footer>
 
 </body>
+
 </html>
