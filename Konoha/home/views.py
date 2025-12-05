@@ -13,3 +13,5 @@ def arriendos(request):
     return render (request, 'arriendos.html')
 def ayuda(request):
     return render (request, 'ayuda.html')
+def productos(request):
+    return render (request, 'productos.html')

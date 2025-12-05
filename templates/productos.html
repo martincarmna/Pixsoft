@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PRODUCTOS</title>
+  <style>
+    /* ========= Base y fondo animado (coherente con login) ========= */
+    :root{
+      --turq:#B0F5E9;
+      --turq-2:#7fded0;
+      --turq-3:#4fb8a8;
+      --turq-4:#2a7c6f;
+      --text:#000;
+      --text-soft:#444;
+      --surface:#fff;
+      --shadow:0 6px 18px rgba(0,0,0,0.15);
+      --radius:12px;
+      --radius-sm:8px;
+    }
+    html, body {
+      margin:0; padding:0; font-family: Arial, sans-serif; color: var(--text);
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(-45deg, var(--turq), var(--turq-2), var(--turq-3), var(--turq-4));
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    a { color: var(--text); text-decoration: none; }
+
+    /* ========= Header ========= */
+    .header {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: saturate(120%) blur(6px);
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 24px;
+      position: sticky; top:0; z-index: 50;
+      box-shadow: var(--shadow);
+    }
+    .header .left, .header .right { display:flex; align-items:center; gap:14px; }
+    .logo { height:36px; }
+    .nav { display:flex; gap:12px; }
+    .nav a { font-weight:bold; padding:8px 10px; border-radius: var(--radius-sm); }
+    .nav a:hover { background: var(--turq); }
+    .search {
+      display:flex; align-items:center; gap:8px; background: var(--surface);
+      padding: 6px 10px; border-radius: var(--radius-sm); box-shadow: var(--shadow);
+    }
+    .search input { border:none; outline:none; width:220px; }
+    .icons { display:flex; gap:10px; align-items:center; }
+    .avatar { width:32px; height:32px; border-radius:50%; }
+
+    /* ========= Mega menú ========= */
+    .mega-trigger { position:relative; }
+    .mega { display:none; position:absolute; left:0; top:110%;
+      width: min(1100px, 95vw); background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 18px; z-index: 100;
+    }
+    .mega-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+    .mega h4 { margin: 6px 0 10px; color: var(--turq-4); }
+    .mega ul { list-style:none; padding:0; margin:0; }
+    .mega li { margin:6px 0; color: var(--text-soft); }
+    .mega-trigger:hover .mega { display:block; }
+
+    /* ========= Carrusel ========= */
+    .banner { max-width: 1100px; margin: 20px auto; }
+    .banner-carousel {
+      position: relative; height: 360px; overflow: hidden; border-radius: var(--radius);
+      box-shadow: var(--shadow); background: var(--surface);
+    }
+    .carousel-track { display:flex; transition: transform 0.6s ease-in-out; }
+    .carousel-track img { width: 1100px; height: 360px; object-fit: cover; flex-shrink: 0; }
+    .carousel-btn {
+      position:absolute; top:50%; transform: translateY(-50%);
+      border:none; background: rgba(255,255,255,0.7); backdrop-filter: blur(4px);
+      font-size: 1.8rem; padding: 4px 10px; border-radius: 50%; cursor:pointer;
+    }
+    .carousel-btn.prev { left: 12px; }
+    .carousel-btn.next { right: 12px; }
+    .carousel-btn:hover { background: rgba(255,255,255,0.95); }
+    .carousel-indicators {
+      position:absolute; bottom: 10px; left:50%; transform: translateX(-50%);
+      display:flex; gap:8px;
+    }
+    .carousel-indicators span {
+      width:12px; height:12px; border-radius:50%;
+      background: rgba(0,0,0,0.35); cursor:pointer;
+    }
+    .carousel-indicators .active { background: var(--turq-4); }
+
+    /* ========= Destacados y layout ========= */
+    .content { max-width: 1100px; margin: 0 auto; padding: 10px 16px 40px; }
+    .section-title { margin: 22px 4px 12px; color: var(--turq-4); }
+    .featured-cats { display:grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .chip {
+      background: rgba(255,255,255,0.9); border-radius: 999px; padding: 10px 12px;
+      text-align:center; box-shadow: var(--shadow); font-weight:bold;
+    }
+    .chip:hover { background: var(--turq); }
+
+    /* ========= Sidebar + productos ========= */
+    .grid {
+      display:grid; grid-template-columns: 280px 1fr; gap: 16px; margin-top: 16px;
+    }
+    .sidebar {
+      background: rgba(255,255,255,0.95); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 16px;
+    }
+    .filter-group { margin-bottom: 14px; }
+    .filter-group h5 { margin: 0 0 8px; color: var(--turq-4); }
+    .filter-group label { display:block; margin:6px 0; color: var(--text-soft); }
+    .products {
+      display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .card {
+      background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 12px; display:flex; flex-direction: column;
+    }
+    .card img { width:100%; height:170px; object-fit: cover; border-radius: var(--radius-sm); }
+    .card h3 { margin: 10px 0 6px; }
+    .price { font-weight:bold; }
+    .card .actions { margin-top:auto; display:flex; gap:8px; }
+    .btn {
+      padding: 8px 10px; border:none; border-radius: var(--radius-sm);
+      cursor:pointer; font-weight:bold; background: var(--turq); color: var(--text);
+    }
+    .btn.secondary { background: var(--surface); border: 1px solid var(--turq-3); color: var(--turq-4); }
+
+    /* ========= Leasing / Cotización ========= */
+    .leasing {
+      margin-top: 30px; background: rgba(255,255,255,0.95);
+      border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px;
+    }
+    .tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .tab {
+      padding: 8px 12px; border-radius: 999px; background: var(--surface);
+      border: 1px solid var(--turq-3); cursor:pointer; font-weight:bold;
+    }
+    .tab.active { background: var(--turq); border-color: transparent; }
+    .tabpanes > div { display:none; padding: 14px 2px; }
+    .tabpanes > div.active { display:block; }
+    .form-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin: 10px 0; }
+    .form-row input, .form-row select {
+      padding:10px; border-radius: var(--radius-sm); border: 1px solid #ddd;
+    }
+    .quote-actions { display:flex; gap:10px; margin-top:10px; }
+
+    /* ========= Footer ========= */
+    .footer {
+      background: rgba(255,255,255,0.85);
+      border-radius: var(--radius) var(--radius) 0 0;
+      margin-top: 40px; box-shadow: var(--shadow); padding: 24px;
+    }
+    .footer-top { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .footer-col h4 { margin: 0 0 10px; color: var(--turq-4); }
+    .newsletter { display:flex; gap:10px; }
+    .newsletter input { padding: 8px; border:1px solid #ccc; border-radius: var(--radius-sm); }
+    .newsletter button { padding: 8px 12px; border:none; border-radius: var(--radius-sm); background: var(--turq); font-weight:bold; cursor:pointer; }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; margin-top: 16px; }
+
+    @media (max-width: 1024px){
+      .featured-cats { grid-template-columns: repeat(3, 1fr); }
+      .grid { grid-template-columns: 1fr; }
+      .products { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .carousel-track img { width: 100vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="left">
+      <img src="/static/imagenes/logoutt_sinfondo.png" class="logo" alt="PIXSOFT"/>
+      <nav class="nav">
+        <div class="mega-trigger">
+          <a href="#">Categorías</a>
+          <!-- Mega menú -->
+          <div class="mega">
+            <div class="mega-grid">
+              <!-- CABLES -->
+              <div>
+                <h4>Cables y adaptadores</h4>
+                <ul>
+                  <li>Adaptadores</li>
+                  <li>Cables HDMI</li>
+                  <li>Adaptadores HDMI</li>
+                  <li>Cables DisplayPort</li>
+                  <li>Adaptadores DisplayPort</li>
+                  <li>Cables DVI</li>
+                  <li>Adaptadores DVI</li>
+                  <li>Cables VGA</li>
+                  <li>Adaptadores VGA</li>
+                  <li>Cables USB</li>
+                  <li>Adaptadores USB</li>
+                  <li>Cables KVM</li>
+                  <li>Audio: Adaptadores y Cables</li>
+                  <li>HUB USB</li>
+                  <li>Cables Coaxial</li>
+                  <li>Cargadores / Alimentación</li>
+                  <li>Cargador/Adaptador Laptop</li>
+                  <li>Cables Serial</li>
+                  <li>Adaptadores discos duros</li>
+                  <li>Cables Lightning</li>
+                </ul>
+              </div>
+              <!-- COMPONENTES -->
+              <div>
+                <h4>Componentes</h4>
+                <ul>
+                  <li>Ensamble</li><li>Dispositivos de entrada</li><li>Monitores</li>
+                  <li>Kits Teclado y Mouse</li><li>Gabinetes</li><li>Teclados</li>
+                  <li>Tarjetas Madre</li><li>Mouse</li><li>Memorias RAM</li>
+                  <li>Mouse Pads</li><li>Procesadores</li><li>Webcams</li>
+                  <li>Enfriamiento y Ventilación</li><li>SSD</li><li>Accesorios</li>
+                  <li>Discos Duros</li><li>Pastas térmicas</li><li>Fuentes de Poder</li>
+                  <li>Soportes para monitores</li><li>Quemadores DVD</li><li>Adaptadores HDD</li>
+                  <li>Tarjetas / Video / Sonido / Seriales / Paralelas</li>
+                  <li>Lectores de Memorias</li><li>Estaciones de trabajo</li><li>Herramientas</li>
+                </ul>
+              </div>
+              <!-- COMPUTADORAS -->
+              <div>
+                <h4>Computadoras</h4>
+                <ul>
+                  <li>Equipos de cómputo</li><li>Apple</li><li>Laptops</li><li>MacBook</li>
+                  <li>Tabletas / iPad</li><li>PCs de Escritorio</li><li>iMac / All in One</li>
+                  <li>Audio</li><li>Mini PC</li><li>Garantías</li>
+                  <li>Almacenamiento portátil</li><li>Gabinetes para discos</li><li>Workstations</li>
+                  <li>Memorias USB / Flash</li><li>Móviles</li>
+                  <li>Discos duros externos / escritorio</li><li>Óptico</li>
+                </ul>
+              </div>
+              <!-- CONECTIVIDAD / ELECTRÓNICA / ENERGÍA / GAMING / IMPRESIÓN / POS -->
+              <div>
+                <h4>Conectividad</h4>
+                <ul>
+                  <li>Redes activas/pasivas</li><li>Switches / Routers / AP</li>
+                  <li>Adaptadores (Ethernet/USB)</li><li>Tarjetas de Red</li>
+                  <li>Antenas / Extensores / Inyectores PoE</li>
+                  <li>Transceptores / Convertidores</li><li>Accesorios / Herramientas</li>
+                </ul>
+                <h4>Electrónica</h4>
+                <ul>
+                  <li>Pantallas / Proyectores / Soportes</li><li>TV</li><li>Streaming</li>
+                  <li>Consolas / Gaming</li><li>Audio</li><li>Fotografía</li>
+                  <li>Wearables / Drones</li>
+                </ul>
+                <h4>Energía</h4>
+                <ul>
+                  <li>Protectores / Reguladores / Supresores</li><li>No Breaks / UPS</li>
+                  <li>Inversores / PDU / Multicontactos</li><li>Baterías / Powerbanks / Pilas</li>
+                  <li>Solar: Paneles y accesorios</li><li>Estación de carga</li>
+                </ul>
+                <h4>Gaming e impresión</h4>
+                <ul>
+                  <li>Accesorios / Laptops / Monitores / PCs</li>
+                  <li>Impresión / Multifuncionales / Consumibles</li>
+                  <li>Plotters / POS / Escáner</li>
+                  <li>Accesorios de impresión</li>
+                </ul>
+                <h4>Punto de venta</h4>
+                <ul>
+                  <li>Componentes / Consumibles / AIO</li><li>Terminales / Etiquetas / Rollos</li>
+                  <li>Lectores / Accesorios / Cajones</li><li>Quioscos / Robots / Baterías</li>
+                </ul>
+                <h4>Hogar y línea blanca / Accesorios</h4>
+                <ul>
+                  <li>Hogar inteligente / Línea blanca</li><li>Contactos / Focos / Sensores</li>
+                  <li>Electrodomésticos / Cámaras</li><li>Iluminación / Tiras LED</li>
+                  <li>Accesorios Apple / Laptops / Tablets</li><li>Fundas / Gadgets / Limpieza</li>
+                  <li>Montaje / Pantallas / Soportes</li><li>Thunderbolt / Lightning</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="menu">
+        <a href="#">Home</a>
+        
+        <a href="#">Apartado</a>
+        <a href="./productos.html">Productos</a>
+        <a href="#">Pedidos</a>
+        <a href="#">Ayuda</a>
+        <a href="./arriendos.html">Arriendos</a>
+    </nav>
+      </nav>
+    </div>
+    <div class="right">
+      <div class="search">
+        <input type="text" placeholder="Buscar productos, categorías…"/>
+        🔍
+      </div>
+      ❤️ 🛒
+      <img src="/static/imagenes/usericono.png" class="avatar" alt="Perfil"/>
+    </div>
+  </header>
+
+  <!-- Carrusel -->
+  <section class="banner">
+    <div class="banner-carousel">
+      <div class="carousel-track">
+        <img src="/static/imagenes/banner.png" alt="Promoción 1"/>
+        <img src="/static/imagenes/imagen1.jpg" alt="Promoción 2"/>
+        <img src="/static/imagenes/imagen2.avif" alt="Promoción 3"/>
+        <img src="/static/imagenes/imagen3.webp" alt="Promoción 4"/>
+      </div>
+      <button class="carousel-btn prev">⟨</button>
+      <button class="carousel-btn next">⟩</button>
+      <div class="carousel-indicators">
+        <span class="active"></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destacados -->
+  <main class="content">
+    <h2 class="section-title">Explora por categoría</h2>
+    <div class="featured-cats">
+      <div class="chip">Cables y Adaptadores</div>
+      <div class="chip">Componentes</div>
+      <div class="chip">Computadoras</div>
+      <div class="chip">Conectividad</div>
+      <div class="chip">Electrónica</div>
+      <div class="chip">Impresión</div>
+    </div>
+
+    <!-- Layout principal con sidebar y productos -->
+    <div class="grid">
+      <aside class="sidebar">
+        <div class="filter-group">
+          <h5>Categoría</h5>
+          <label><input type="checkbox"/> Cables</label>
+          <label><input type="checkbox"/> Adaptadores</label>
+          <label><input type="checkbox"/> SSD</label>
+          <label><input type="checkbox"/> Laptops</label>
+          <label><input type="checkbox"/> Monitores</label>
+        </div>
+        <div class="filter-group">
+          <h5>Marca</h5>
+          <label><input type="checkbox"/> Dell</label>
+          <label><input type="checkbox"/> HP</label>
+          <label><input type="checkbox"/> Lenovo</label>
+          <label><input type="checkbox"/> ASUS</label>
+        </div>
+        <div class="filter-group">
+          <h5>Precio</h5>
+          <label><input type="checkbox"/> Menos de $500</label>
+          <label><input type="checkbox"/> $500 – $2,000</label>
+          <label><input type="checkbox"/> Más de $2,000</label>
+        </div>
+        <button class="btn" style="width:100%;">Aplicar filtros</button>
+      </aside>
+
+      <section class="products">
+        <article class="card">
+          <img src="/static/imagenes/impresoras.png" alt="Impresora">
+          <h3>Impresora multifuncional</h3>
+          <p class="price">$3,990</p>
+          <div class="actions">
+            <button class="btn">Agregar</button>
+            <button class="btn secondary">Detalles</button>
+          </div>
+        </article>
+        <article class="card">
+          <img src="/static/imagenes/controles.png" alt="Mouse Gamer">
+          <h3>Mouse Gamer RGB</h3>
+          <p class="price">$699</p>
+          <div class="actions">
+            <button class="btn">Agregar</button>
+            <button class="btn secondary">Detalles</button>
+          </div>
+        </article>
+        <article class="card">
+          <img src="/static/imagenes/iPhone.jpg" alt="SSD NVMe">
+          <h3>SSD NVMe 1TB</h3>
+          <p class="price">$1,799</p>
+          <div class="actions">
+            <button class="btn">Agregar</button>
+            <button class="btn secondary">Detalles</button>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <!-- Leasing / Cotización -->
+    <section id="leasing" class="leasing">
+      <h2 class="section-title">Cotiza leasing de equipos</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="tab-pc">Portátiles y escritorio</button>
+        <button class="tab" data-tab="tab-srv">Servidores y equipo de red</button>
+        <button class="tab" data-tab="tab-print">Impresión y digitalización</button>
+      </div>
+      <div class="tabpanes">
+        <div id="tab-pc" class="active">
+          <div class="form-row">
+            <select><option>Categoría</option><option>Laptop</option><option>PC Escritorio</option><option>Workstation</option></select>
+            <input type="number" placeholder="Cantidad"/>
+            <select><option>Plazo</option><option>12 meses</option><option>24 meses</option><option>36 meses</option></select>
+          </div>
+          <div class="form-row">
+            <select><option>Rango precio unitario</option><option>$10k–$20k</option><option>$20k–$40k</option><option>$40k+</option></select>
+            <input type="text" placeholder="Uso / Perfil (ventas, edición, oficina)"/>
+            <input type="email" placeholder="Email de contacto"/>
+          </div>
+          <div class="quote-actions">
+            <button class="btn">Solicitar cotización</button>
+            <button class="btn secondary">Guardar borrador</button>
+          </div>
+        </div>
+        <div id="tab-srv">
+          <div class="form-row">
+            <select><option>Tipo</option><option>Servidor rack</option><option>Servidor torre</option><option>Switch</option><option>Router</option></select>
+            <input type="number" placeholder="Cantidad"/>
+            <select><option>Plazo</option><option>12</option><option>24</option><option>36</option></select>
+          </div>
+          <div class="form-row">
+            <select><option>Nivel</option><option>Entrada</option><option>Medio</option><option>Enterprise</option></select>
+            <input type="text" placeholder="Requerimientos (CPU/RAM/Red)"/>
+            <input type="email" placeholder="Email de contacto"/>
+          </div>
+          <div class="quote-actions">
+            <button class="btn">Solicitar cotización</button>
+            <button class="btn secondary">Guardar borrador</button>
+          </div>
+        </div>
+        <div id="tab-print">
+          <div class="form-row">
+            <select><option>Equipo</option><option>Impresora</option><option>Multifuncional</option><option>Escáner</option><option>Fotocopiadora</option></select>
+            <input type="number" placeholder="Cantidad"/>
+            <select><option>Plazo</option><option>12</option><option>24</option><option>36</option></select>
+          </div>
+          <div class="form-row">
+            <select><option>Volumen mensual</option><option>1k–5k páginas</option><option>5k–20k</option><option>20k+</option></select>
+            <input type="text" placeholder="Tipo de insumo (tinta/toner)"/>
+            <input type="email" placeholder="Email de contacto"/>
+          </div>
+          <div class="quote-actions">
+            <button class="btn">Solicitar cotización</button>
+            <button class="btn secondary">Guardar borrador</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Software -->
+    <section id="software" class="leasing">
+      <h2 class="section-title">Software empaquetado</h2>
+      <div class="featured-cats" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="chip">OS</div>
+        <div class="chip">Office</div>
+        <div class="chip">MS 365</div>
+        <div class="chip">Antivirus</div>
+        <div class="chip">Punto de venta</div>
+        <div class="chip">Admon y finanzas</div>
+        <div class="chip">Licenciamiento</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contacto" class="footer">
+    <div class="footer-top">
+      <div class="footer-col">
+        <img src="/static/imagenes/logoutt.png" class="logo" alt="PIXSOFT"/>
+        <p>www.pixsoft.com.mx</p>
+        <p>Servicios integrales en TI y desarrollo de software</p>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <p>Características</p><p>Precios</p>
+      </div>
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <p>Blog</p><p>Guías</p><p>Webinars</p>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <p>Sobre nosotros</p><p>Únete</p>
+      </div>
+      <div class="footer-col">
+        <h4>Suscríbete</h4>
+        <p>Noticias y lanzamientos</p>
+        <div class="newsletter">
+          <input type="email" placeholder="Tu email"/>
+          <button>Suscribirme</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <select><option>Español (MX)</option></select>
+      <p>© 2025 PIXSOFT — Privacidad · Términos · Sitemap</p>
+      <div>🌐 🐦 📘 🔗 ▶️</div>
+    </div>
+  </footer>
+
+  <!-- JS: carrusel + tabs leasing -->
+  <script>
+    // Carrusel
+    (function(){
+      const track = document.querySelector('.carousel-track');
+      const slides = Array.from(track.children);
+      const prevBtn = document.querySelector('.carousel-btn.prev');
+      const nextBtn = document.querySelector('.carousel-btn.next');
+      const indicators = document.querySelectorAll('.carousel-indicators span');
+      let index = 0, width = slides[0].getBoundingClientRect().width, timer;
+
+      function setWidth(){ width = slides[0].getBoundingClientRect().width; }
+      function goTo(i){
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * width}px)`;
+        indicators.forEach((d,k)=> d.classList.toggle('active', k===index));
+      }
+      function next(){ goTo(index+1); }
+      function start(){ stop(); timer = setInterval(next, 4000); }
+      function stop(){ if (timer) clearInterval(timer); }
+
+      nextBtn.addEventListener('click', ()=>{ next(); start(); });
+      prevBtn.addEventListener('click', ()=>{ goTo(index-1); start(); });
+      indicators.forEach((d,i)=> d.addEventListener('click', ()=>{ goTo(i); start(); }));
+      window.addEventListener('resize', ()=>{ setWidth(); goTo(index); });
+
+      setWidth(); goTo(0); start();
+    })();
+
+    // Tabs leasing
+    (function(){
+      const tabs = document.querySelectorAll('.tab');
+      const panes = document.querySelectorAll('.tabpanes > div');
+      tabs.forEach(tab=>{
+        tab.addEventListener('click', ()=>{
+          tabs.forEach(t=> t.classList.remove('active'));
+          tab.classList.add('active');
+          const id = tab.dataset.tab;
+          panes.forEach(p=> p.classList.toggle('active', p.id===id));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

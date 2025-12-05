@@ -1,149 +1,254 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - PIXSOFT</title>
-    <link rel="stylesheet" href="/static/css/loginuser.css">
-    
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión - PIXSOFT</title>
+  <style>
+    /* Fondo animado */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
 
+    .login-bg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+
+      background: linear-gradient(-45deg, #B0F5E9, #7fded0, #4fb8a8, #2a7c6f);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 0 0 12px 12px;
+    }
+    .header-right a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+    .profile-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    /* Tarjeta de login */
+    .login-card {
+      display: flex;
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      overflow: hidden;
+      max-width: 800px;
+      width: 100%;
+    }
+    .login-left, .login-right {
+      flex: 1;
+      padding: 40px;
+    }
+    .login-left h2 {
+      margin-bottom: 20px;
+      color: #2a7c6f;
+    }
+    .login-left label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .login-left input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .input-icon {
+      display: flex;
+      align-items: center;
+    }
+    .input-icon .icon {
+      margin-right: 8px;
+    }
+    .login-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #B0F5E9;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .login-btn:hover {
+      background: #7fded0;
+    }
+    .or-text {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .forgot, .create {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #2a7c6f;
+      text-decoration: none;
+    }
+
+    .login-right img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(255,255,255,0.8);
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 12px 12px 0 0;
+      color: #000;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-col h4 { margin-bottom: 10px; }
+    .newsletter {
+      display: flex;
+      gap: 10px;
+    }
+    .newsletter input {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .newsletter button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #B0F5E9;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .footer-bottom {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .copytext {
+      font-size: 0.8rem;
+    }
+    .socials {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
-        <!-- <img src="/static/imagenes/logoutt.png" class="logo" alt="PIXSOFT"> -->
-        <div class="header-right">
-            <a href="#">Crear cuenta</a>
-            <img src="/static/imagenes/usericono.png" class="profile-img">
-        </div>
-    </header>
-
-    <!-- TURQUOISE BACKGROUND -->
-    <div class="login-bg">
-
-        <!-- WHITE CARD -->
-        <div class="login-card">
-
-            <!-- LEFT LOGIN FORM -->
-            <div class="login-left">
-                <h2>Iniciar sesión</h2>
-
-                <label>User</label>
-                <input type="text" placeholder="john.pork@example.com">
-
-                <label>Password</label>
-                <div class="input-icon">
-                    <span class="icon">🔒</span>
-                    <input type="password" placeholder="********">
-                </div>
-
-                <!-- BOTÓN CON LINK A HOME -->
-                <!-- Opción 1: enlace (sin JS) -->
-<a href="/index.html" class="login-btn" role="button">Sign In</a>
-
-<!-- Opción 2: botón (con JS) por si el CSS u overlay impide clicks en el <a>) -->
-<button id="loginButton" class="login-btn" type="button" style="display:none;">Sign In</button>
-
-<script>
-  // Mostrar el <button> sólo si el <a> no funciona por alguna razón visual/overlay:
-  (function(){
-    // Comprueba si el link existe y tiene href válido
-    var link = document.querySelector('.login-btn[href]');
-    var href = link ? link.getAttribute('href') : null;
-
-    // Si el href está vacío o contiene el tag Django (no procesado), usa ruta absoluta
-    if (!href || href.includes('{%')) {
-      href = '/home/'; // fallback absoluto
-      if (link) link.setAttribute('href', href);
-    }
-
-    // Si hay un overlay CSS que impide clicks, forzamos el botón visible y lo usamos
-    var rect = link ? link.getBoundingClientRect() : null;
-    var clickable = true;
-    if (rect && (rect.width === 0 || rect.height === 0)) clickable = false;
-
-    if (!clickable) {
-      var btn = document.getElementById('loginButton');
-      btn.style.display = 'inline-block';
-      btn.addEventListener('click', function(){ window.location.href = href; });
-      // mejorar accesibilidad
-      btn.setAttribute('aria-label', 'Sign In, ir a Home');
-    }
-
-    // Protector: si hay errores JS en bton.js que rompen código, lo capturamos
-  })();
-</script>
-
-
-                <p class="or-text">OR CONTINUE WITH</p>
-
-                <a href="#" class="forgot">Forgot password?</a><br>
-                <a href="#" class="create">Create account</a>
-            </div>
-
-            <!-- RIGHT IMAGE -->
-            <div class="login-right">
-                <img src="/static/imagenes/logoEmpresa.png" class="product-img">
-            </div>
-
-        </div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-right">
+      <a href="#">Crear cuenta</a>
+      <img src="/static/imagenes/usericono.png" class="profile-img" alt="Usuario">
     </div>
+  </header>
 
-    <!-- FOOTER -->
-    <footer class="footer">
+  <!-- BACKGROUND + LOGIN CARD -->
+  <div class="login-bg">
+    <div class="login-card">
+      <!-- LEFT LOGIN FORM -->
+      <div class="login-left">
+        <h2>Iniciar sesión</h2>
 
-        <div class="footer-top">
+        <label>User</label>
+        <input type="text" placeholder="john.pork@example.com">
 
-            <div class="footer-col logo-col">
-                <img src="/static/imagenes/logoutt.png" class="footer-logo">
-            </div>
-
-            <div class="footer-col">
-                <h4>Product</h4>
-                <p>Features</p>
-                <p>Pricing</p>
-            </div>
-
-            <div class="footer-col">
-                <h4>Resources</h4>
-                <p>Blog</p>
-                <p>User guides</p>
-                <p>Webinars</p>
-            </div>
-
-            <div class="footer-col">
-                <h4>Company</h4>
-                <p>About</p>
-                <p>Join us</p>
-            </div>
-
-            <div class="footer-col">
-                <h4>Subscribe to our newsletter</h4>
-                <p class="footer-small">For product announcements and insights</p>
-                <div class="newsletter">
-                    <input type="email" placeholder="Input your email">
-                    <button>Subscribe</button>
-                </div>
-            </div>
-
+        <label>Password</label>
+        <div class="input-icon">
+          
+          <input type="password" placeholder="🔒********">
         </div>
 
-        <div class="footer-bottom">
-            <select>
-                <option>English</option>
-            </select>
+        <a href="/index.html" class="login-btn" role="button">Sign In</a>
 
-            <p class="copytext">© 2024 PIXSOFT — Privacy · Terms · Sitemap</p>
+        
 
-            <div class="socials">
-                🌐 🐦 📘 🔗 ▶️
-            </div>
+        <a href="#" class="forgot">Forgot password?</a><br>
+        <a href="#" class="create">Create account</a>
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div class="login-right">
+        <img src="/static/imagenes/logoEmpresa.png" class="product-img" alt="Logo Empresa">
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-col logo-col">
+        <img src="/static/imagenes/logoutt.png" class="footer-logo" alt="PIXSOFT">
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <p>Features</p>
+        <p>Pricing</p>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <p>Blog</p>
+        <p>User guides</p>
+        <p>Webinars</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <p>About</p>
+        <p>Join us</p>
+      </div>
+      <div class="footer-col">
+        <h4>Subscribe to our newsletter</h4>
+        <p class="footer-small">For product announcements and insights</p>
+        <div class="newsletter">
+          <input type="email" placeholder="Input your email">
+          <button>Subscribe</button>
         </div>
-
-    </footer>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <select>
+        <option>English</option>
+      </select>
+      <p class="copytext">© 2024 PIXSOFT — Privacy · Terms · Sitemap</p>
+      <div class="socials">🌐 🐦 📘 🔗 ▶️</div>
+    </div>
+  </footer>
 
 </body>
-
 </html>

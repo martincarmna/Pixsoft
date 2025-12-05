@@ -7,19 +7,51 @@
     <link rel="stylesheet" href="/static/css/index.css">
     <style>
         /* Fondo animado con gradiente en movimiento */
-    body {
+     body {
       margin: 0;
       font-family: Arial, sans-serif;
       min-height: 100vh;
-      background: linear-gradient(-45deg, #6495ef, #2a5298, #76c4e6, #203a43);
+      background: linear-gradient(-45deg, #B0F5E9, #7fded0, #4fb8a8, #2a7c6f);
       background-size: 400% 400%;
       animation: gradientMove 15s ease infinite;
-      color: #fff;
+      color: #000;
     }
     @keyframes gradientMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    .header {
+      background: rgba(255,255,255,0.8);
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      border-radius: 0 0 12px 12px;
+    }
+    .menu a {
+      margin: 0 10px;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .search-box input {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
     }
 
     /* Carrusel */
@@ -32,6 +64,7 @@
       overflow: hidden;
       border-radius: 12px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      background: #fff;
     }
     .carousel-track {
       display: flex;
@@ -70,49 +103,16 @@
     .carousel-indicators span {
       width: 12px;
       height: 12px;
-      background: rgba(255,255,255,0.6);
+      background: rgba(0,0,0,0.4);
       border-radius: 50%;
       cursor: pointer;
     }
     .carousel-indicators .active {
-      background: rgba(255,255,255,0.9);
-    }
-
-    /* Header básico */
-    .header {
-      background-color: white;
-      color: black;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-     
-    }
-    .menu a {
-        background-color: white;
-      margin: 0 10px;
-      color: black;
-      text-decoration: none;
-    }
-    .search-box input {
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: none;
-    }
-    .header-icons {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
+      background: #000;
     }
 
     /* Productos */
     .products-container {
-       
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 20px;
@@ -120,11 +120,12 @@
       margin: 40px auto;
     }
     .product-card {
-        background-color: white;
-     color: black;
+      background: rgba(255,255,255,0.9);
+      color: #000;
       border-radius: 12px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 15px;
     }
     .product-card img {
       width: 100%;
@@ -139,12 +140,13 @@
       padding: 6px 12px;
       border: none;
       border-radius: 8px;
-      background-color: #B0F5E9;
+      background: #B0F5E9;
       color: #000;
       cursor: pointer;
+      font-weight: bold;
     }
 
-      
+    /* Paginación */
     .pagination {
       text-align: center;
       margin: 20px 0;
@@ -155,18 +157,21 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      background: #fff;
     }
     .pagination .active {
       background: #B0F5E9;
       color: #000;
+      font-weight: bold;
     }
 
     /* Footer */
     .footer {
-      background: rgba(0,0,0,0.4);
+      background: rgba(255,255,255,0.8);
       padding: 30px;
       margin-top: 40px;
       border-radius: 12px 12px 0 0;
+      color: #000;
     }
     .footer-top {
       display: flex;
@@ -182,7 +187,7 @@
     .newsletter-box input {
       padding: 6px;
       border-radius: 6px;
-      border: none;
+      border: 1px solid #ccc;
     }
     .newsletter-box button {
       padding: 6px 12px;
@@ -191,6 +196,7 @@
       background: #B0F5E9;
       color: #000;
       cursor: pointer;
+      font-weight: bold;
     }
     .footer-bottom {
       margin-top: 20px;
@@ -199,7 +205,7 @@
       align-items: center;
     }
     .socials span { margin: 0 5px; }
-    </style>
+  </style>
 </head>
 <body>
 
@@ -215,7 +221,7 @@
         <a href="#">Home</a>
         <a href="#">Categorías</a>
         <a href="#">Apartado</a>
-        <a href="#">Productos</a>
+        <a href="./productos.html">Productos</a>
         <a href="#">Pedidos</a>
         <a href="#">Ayuda</a>
         <a href="./arriendos.html">Arriendos</a>
