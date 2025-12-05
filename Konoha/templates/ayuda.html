@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/ayuda.css"> 
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo de la Empresa">
+        </div>
+        <ul class="menu">
+            <li><i class="fas fa-chart-line"></i> Dashboard</li>
+            <li><i class="fas fa-box"></i> Pedidos</li>
+            <li><i class="fas fa-users"></i> Clientes</li>
+            <li class="active"><i class="fas fa-headset"></i> Soporte</li>
+            <li><i class="fas fa-cog"></i> Configuración</li>
+        </ul>
+    </aside>
+
+    <div class="content">
+
+        <nav class="navbar">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar en el centro de ayuda...">
+            </div>
+            <div class="nav-icons">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-envelope"></i>
+                <img src="avatar.jpg" alt="Avatar" class="avatar">
+            </div>
+        </nav>
+
+        <h1 class="title">Soporte y Contacto</h1>
+        
+        <div class="support-container">
+            <section class="support-card chat">
+                <div class="icon-wrapper">
+                    <i class="fas fa-comments icon"></i>
+                </div>
+                <h2>Chat en Vivo ⚡</h2>
+                <p>¿Necesitas ayuda inmediata? Chatea con uno de nuestros agentes de soporte.</p>
+                <button onclick="alert('Iniciando Chat en Vivo...')">Iniciar Chat Ahora</button>
+                <small>Horario: Lunes a Viernes, 9:00 - 18:00</small>
+            </section>
+
+            <section class="support-card tickets">
+                <div class="icon-wrapper">
+                    <i class="fas fa-ticket-alt icon"></i>
+                </div>
+                <h2>Tickets de Soporte 🎫</h2>
+                <p>Crea un ticket para consultas sobre pedidos o problemas técnicos no urgentes.</p>
+                <button onclick="alert('Creando un nuevo Ticket...')">Crear Nuevo Ticket</button>
+                <small>Te responderemos en 24 horas hábiles.</small>
+            </section>
+        </div>
+
+        <section class="faq-section">
+            <h3>Preguntas Frecuentes (FAQ)</h3>
+            <div class="faq-item">
+                <p><strong>¿Cómo puedo rastrear mi pedido?</strong></p>
+                <small>Generalmente puedes rastrearlo a través de la sección "Pedidos" en la barra lateral.</small>
+            </div>
+            <div class="faq-item">
+                <p><strong>¿Cuál es la política de devoluciones?</strong></p>
+                <small>Dispones de 30 días para devoluciones, consulta los términos completos en Configuración.</small>
+            </div>
+        </section>
+
+        </div>
+
+    <footer class="site-footer">
+        <div class="footer">
+            <div class="footer-columns">
+                </div>
+        </div>
+        <div class="sub-footer">
+            &copy; 2025 Tu Empresa. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
