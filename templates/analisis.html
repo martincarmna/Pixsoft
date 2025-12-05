@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo de Informes y Análisis</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #B0F5E9, #7fded0, #4fb8a8, #2a7c6f);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      color: #000;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    h2 { color: #2a7c6f; }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .kpi {
+      background: #B0F5E9;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc; padding: 8px; text-align: center;
+    }
+    th { background: #B0F5E9; }
+    .low-stock { background: #fff3cd; }
+    .out-stock { background: #f8d7da; }
+    canvas { width: 100%; height: 300px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Análisis de Ventas -->
+    <div class="card">
+      <h2>📊 Análisis de Ventas</h2>
+      <div class="kpi-grid">
+        <div class="kpi">Ingresos Totales<br>$120,000</div>
+        <div class="kpi">Producto más vendido<br>SSD NVMe</div>
+        <div class="kpi">Cliente frecuente<br>Empresa ABC</div>
+      </div>
+      <canvas id="ventasChart"></canvas>
+    </div>
+
+    <!-- Gestión de Inventarios -->
+    <div class="card">
+      <h2>📦 Gestión de Inventarios</h2>
+      <table>
+        <tr><th>Producto</th><th>Stock</th><th>Estado</th></tr>
+        <tr><td>Laptop Dell</td><td>50</td><td>Disponible</td></tr>
+        <tr class="low-stock"><td>Mouse Gamer</td><td>5</td><td>Bajo stock</td></tr>
+        <tr class="out-stock"><td>Impresora HP</td><td>0</td><td>Agotado</td></tr>
+      </table>
+    </div>
+
+    <!-- Análisis de Arrendamientos -->
+    <div class="card">
+      <h2>📈 Análisis de Arrendamientos</h2>
+      <div class="kpi-grid">
+        <div class="kpi">Equipos alquilados<br>120</div>
+        <div class="kpi">Rentabilidad<br>$45,000</div>
+        <div class="kpi">Clientes activos<br>35</div>
+      </div>
+      <canvas id="arrendamientosChart"></canvas>
+    </div>
+
+  </div>
+
+  <!-- JS para gráficas (usando Chart.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ventasCtx = document.getElementById('ventasChart').getContext('2d');
+    new Chart(ventasCtx, {
+      type: 'bar',
+      data: {
+        labels: ['SSD', 'Laptops', 'Monitores', 'Impresoras'],
+        datasets: [{
+          label: 'Ventas',
+          data: [50, 30, 20, 10],
+          backgroundColor: '#7fded0'
+        }]
+      }
+    });
+
+    const arrCtx = document.getElementById('arrendamientosChart').getContext('2d');
+    new Chart(arrCtx, {
+      type: 'line',
+      data: {
+        labels: ['Enero','Febrero','Marzo','Abril'],
+        datasets: [{
+          label: 'Arrendamientos',
+          data: [20, 30, 40, 30],
+          borderColor: '#2a7c6f',
+          fill: false
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
