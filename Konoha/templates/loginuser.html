@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - PIXSOFT</title>
+    <link rel="stylesheet" href="/static/css/loginuser.css">
+    
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <!-- <img src="/static/imagenes/logoutt.png" class="logo" alt="PIXSOFT"> -->
+        <div class="header-right">
+            <a href="#">Crear cuenta</a>
+            <img src="/static/imagenes/usericono.png" class="profile-img">
+        </div>
+    </header>
+
+    <!-- TURQUOISE BACKGROUND -->
+    <div class="login-bg">
+
+        <!-- WHITE CARD -->
+        <div class="login-card">
+
+            <!-- LEFT LOGIN FORM -->
+            <div class="login-left">
+                <h2>Iniciar sesión</h2>
+
+                <label>User</label>
+                <input type="text" placeholder="john.pork@example.com">
+
+                <label>Password</label>
+                <div class="input-icon">
+                    <span class="icon">🔒</span>
+                    <input type="password" placeholder="********">
+                </div>
+
+                <!-- BOTÓN CON LINK A HOME -->
+                <!-- Opción 1: enlace (sin JS) -->
+<a href="/index.html" class="login-btn" role="button">Sign In</a>
+
+<!-- Opción 2: botón (con JS) por si el CSS u overlay impide clicks en el <a>) -->
+<button id="loginButton" class="login-btn" type="button" style="display:none;">Sign In</button>
+
+<script>
+  // Mostrar el <button> sólo si el <a> no funciona por alguna razón visual/overlay:
+  (function(){
+    // Comprueba si el link existe y tiene href válido
+    var link = document.querySelector('.login-btn[href]');
+    var href = link ? link.getAttribute('href') : null;
+
+    // Si el href está vacío o contiene el tag Django (no procesado), usa ruta absoluta
+    if (!href || href.includes('{%')) {
+      href = '/home/'; // fallback absoluto
+      if (link) link.setAttribute('href', href);
+    }
+
+    // Si hay un overlay CSS que impide clicks, forzamos el botón visible y lo usamos
+    var rect = link ? link.getBoundingClientRect() : null;
+    var clickable = true;
+    if (rect && (rect.width === 0 || rect.height === 0)) clickable = false;
+
+    if (!clickable) {
+      var btn = document.getElementById('loginButton');
+      btn.style.display = 'inline-block';
+      btn.addEventListener('click', function(){ window.location.href = href; });
+      // mejorar accesibilidad
+      btn.setAttribute('aria-label', 'Sign In, ir a Home');
+    }
+
+    // Protector: si hay errores JS en bton.js que rompen código, lo capturamos
+  })();
+</script>
+
+
+                <p class="or-text">OR CONTINUE WITH</p>
+
+                <a href="#" class="forgot">Forgot password?</a><br>
+                <a href="#" class="create">Create account</a>
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="login-right">
+                <img src="/static/imagenes/logoEmpresa.png" class="product-img">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-top">
+
+            <div class="footer-col logo-col">
+                <img src="/static/imagenes/logoutt.png" class="footer-logo">
+            </div>
+
+            <div class="footer-col">
+                <h4>Product</h4>
+                <p>Features</p>
+                <p>Pricing</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <p>Blog</p>
+                <p>User guides</p>
+                <p>Webinars</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <p>About</p>
+                <p>Join us</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Subscribe to our newsletter</h4>
+                <p class="footer-small">For product announcements and insights</p>
+                <div class="newsletter">
+                    <input type="email" placeholder="Input your email">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <select>
+                <option>English</option>
+            </select>
+
+            <p class="copytext">© 2024 PIXSOFT — Privacy · Terms · Sitemap</p>
+
+            <div class="socials">
+                🌐 🐦 📘 🔗 ▶️
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+/* --- ESTILOS ESPECÍFICOS PARA LA INTERFAZ DE SOPORTE --- */
+
+/* Contenedor principal para organizar Chat y Tickets en la página */
+.support-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Base de la tarjeta de soporte */
+.support-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    flex: 1 1 350px; /* Permite que las tarjetas ocupen un buen ancho y se ajusten */
+    text-align: center;
+    border: 1px solid #f1f1f1; /* Borde sutil */
+    transition: transform 0.2s;
+}
+
+.support-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.support-card h2 {
+    font-size: 1.6em;
+    margin: 10px 0;
+    color: #333;
+}
+
+.support-card p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.support-card small {
+    display: block;
+    color: #999;
+    margin-top: 15px;
+    font-size: 0.8em;
+}
+
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.support-card .icon {
+    font-size: 2.5em;
+    padding: 15px;
+    border-radius: 50%;
+    /* El color del ícono se define en las clases específicas */
+}
+
+/* Estilos para la tarjeta de Chat en Vivo */
+.chat .icon {
+    background: #eaf1ff; /* Fondo azul claro */
+    color: #4678ec; /* Color del ícono y botón (como .process) */
+}
+
+.chat button {
+    background: #4678ec; /* Azul */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.chat button:hover {
+    background: #3660c9;
+}
+
+/* Estilos para la tarjeta de Tickets */
+.tickets .icon {
+    background: #e8f7ed; /* Fondo verde claro */
+    color: #1ea463; /* Color del ícono y botón (como .delivered) */
+}
+
+.tickets button {
+    background: #1ea463; /* Verde */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.tickets button:hover {
+    background: #178a51;
+}
+
+/* Sección de Preguntas Frecuentes (FAQ) */
+.faq-section {
+    width: 100%;
+    margin-top: 40px;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.faq-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 10px;
+}
+
+.faq-item {
+    padding: 10px 0;
+    border-bottom: 1px dotted #eee;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-item p {
+    margin: 5px 0;
+    color: #444;
+}
+
+.faq-item small {
+    display: block;
+    color: #888;
+    margin-left: 15px;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Ajuste del Footer para que ocupe todo el ancho fuera del .content */
+/* El footer debe ir en la estructura del body para que ocupe el 100% */
+.site-footer {
+    width: 100%;
+    margin-top: 40px;
+    background-color: #E5E7EB;
+}

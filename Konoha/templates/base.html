@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konoha</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            background-image: url('/static/imagenes/itachi.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <nav>
+        <a href="">Home</a>
+        <a href="">Acerca</a>
+        <img src="/static/imagenes/logo.png" alt="" width="50" height="50">
+    </nav>
+
+</head>
+
+<body>
+
+    <div class="container">
+        {% block content %}
+        <h1>Welcome to Konoha</h1>
+        {% endblock %}
+    </div>
+
+
+<footer>
+    
+    <p>&copy; 2024 Konoha. All rights reserved.</p>
+    <p>Marty Carps corporation</p>
+</footer>
+
+</body>
+
+</html>
